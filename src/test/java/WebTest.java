@@ -14,7 +14,6 @@ public class WebTest {
         try {
             driver.get("https://www.mts.by");
 
-            // Проверка названия блока
             WebElement blockTitleElement = By.xpath("//h2[contains(text(),'Онлайн пополнение без комиссии')]").findElement(driver);
             String blockTitle = blockTitleElement.getText();
             System.out.println("Название блока: " + blockTitle);
@@ -25,7 +24,6 @@ public class WebTest {
                 System.out.println("Название блока НЕ соответствует ожидаемому.");
             }
 
-            // Проверка логотипов
             String[] logoSelectors = {
                     "/html/body/div[6]/main/div/div[3]/div[1]/div/div/div[2]/section/div/div[2]/ul/li[1]/img",
                     "/html/body/div[6]/main/div/div[3]/div[1]/div/div/div[2]/section/div/div[2]/ul/li[2]/img",
