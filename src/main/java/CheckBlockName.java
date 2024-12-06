@@ -21,7 +21,7 @@ public class CheckBlockName {
     private By continueButton = By.className("button button_default");
 
 
-    public Object getCheckBlockName() {
+    public String getCheckBlockName() {
         return driver.findElement(blockName).getText();
     }
 
