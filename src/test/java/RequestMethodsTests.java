@@ -30,8 +30,8 @@ public class RequestMethodsTests {
                 .post(BASE_URL + "/post");
 
         response.then().statusCode(200);
-        response.then().body("json.names", equalTo(new String[]{"Dorothea", "Rose", "Blanche", "Sophia"}));
-        response.then().body("json.nums", equalTo(new Integer[]{1, 3, 2, 4}));
+        response.then().body("json.names", equalTo(List.of("Dorothea", "Rose", "Blanche", "Sophia")));
+        response.then().body("json.nums", equalTo((List.of(1, 3, 2, 4)));
     }
 
     @Test
@@ -45,8 +45,8 @@ public class RequestMethodsTests {
                 .put(BASE_URL + "/put");
 
         response.then().statusCode(200);
-        response.then().body("json.names", equalTo(new String[]{"Dorothea", "Rose", "Blanche", "Sophia"}));
-        response.then().body("json.nums", equalTo(new Integer[]{1, 3, 2, 4}));
+        response.then().body("json.names", equalTo(List.of("Dorothea", "Rose", "Blanche", "Sophia")));
+        response.then().body("json.nums", equalTo((List.of(1, 3, 2, 4)));
     }
 
     @Test
