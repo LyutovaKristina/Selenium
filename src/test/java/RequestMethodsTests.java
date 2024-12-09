@@ -1,5 +1,6 @@
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
+import java.util.List;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
