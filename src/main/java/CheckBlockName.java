@@ -9,7 +9,7 @@ public class CheckBlockName {
         this.driver = driver;
     }
 
-    private By blockName = By.xpath("//h2[contains(text(), 'Онлайн пополнение без комиссии')]");
+    private By blockName = By.xpath("//h2[contains(text(), 'Онлайн пополнение ')]");
     private By paymentVisa = By.cssSelector("img[src*= 'visa']");
     private By paymentVisaV = By.cssSelector("img[src*= 'visa-verified']");
     private By paymentMasterCardS = By.cssSelector("img[src*= 'mastercard-secure']");
@@ -18,7 +18,7 @@ public class CheckBlockName {
     private By moreInfoLink = By.linkText("Подробнее о сервисе");
     private By serviceTypeSelect = By.id("serviceType");
     private By phoneNumberInput = By.id("connection-phone");
-    private By continueButton = By.className("button button_default");
+    private By continueButton = By.cssSelector("button.button_default");
 
 
     public String getCheckBlockName() {

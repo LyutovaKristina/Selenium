@@ -6,6 +6,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+
 import java.util.concurrent.TimeUnit;
 
 public class CheckFormNameTest {
@@ -15,6 +17,10 @@ public class CheckFormNameTest {
     @Before
     public void setup() {
         System.setProperty("web.driver.chrome.driver", "src/test/java/resource/chromedriver.exe");
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--incognito");
+        WebElement clickCookie = driver.findElement(By.id("cookie-agree"));
+        clickCookie.click();
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
@@ -25,18 +31,18 @@ public class CheckFormNameTest {
 
     @Test
     public void checkConnection () {
-        Assert.assertEquals(checkFormName.getButtonSelectConnectionText("Услуги связи")););
-        Assert.assertEquals(checkFormName.getFormNumber("Номер телефона")););
-        Assert.assertEquals(checkFormName.getFormSumm("Сумма")));
-        Assert.assertEquals(checkFormName.getButtonSelecHome("домашний интернет")));
-        Assert.assertEquals(checkFormName.getFormSubscriber("Номер абонента")));
-        Assert.assertEquals(checkFormName.getFormSummInternet("Сумма")););
-        Assert.assertEquals(checkFormName.getButtonSelectInstallment("Рассрочка")));
-        Assert.assertEquals(checkFormName.getFormNumberInstallment("Номер счета на 44")));
-        Assert.assertEquals(checkFormName.getFormSummInstallment("Сумма")));
-        Assert.assertEquals(checkFormName.getButtonSelectDebt("Задолженность")));
-        Assert.assertEquals(checkFormName.getFormArrears("Номер счета на 2073")));
-        Assert.assertEquals(checkFormName.getFormSummArrears("Сумма")));
+        Assert.assertTrue(checkFormName.getButtonSelectConnectionText());
+        Assert.assertTrue(checkFormName.getFormNumber());
+        Assert.assertTrue(checkFormName.getFormSumm());
+        Assert.assertTrue(checkFormName.getButtonSelecHome());
+        Assert.assertTrue(checkFormName.getFormSubscriber());
+        Assert.assertTrue(checkFormName.getFormSummInternet());
+        Assert.assertTrue(checkFormName.getButtonSelectInstallment());
+        Assert.assertTrue(checkFormName.getFormNumberInstallment());
+        Assert.assertTrue(checkFormName.getFormSummInstallment());
+        Assert.assertTrue(checkFormName.getButtonSelectDebt());
+        Assert.assertTrue(checkFormName.getFormArrears());
+        Assert.assertTrue(checkFormName.getFormSummArrears());
     }
 
     @Test
@@ -50,35 +56,35 @@ public class CheckFormNameTest {
         inputSumm.click();
         inputSumm.sendKeys("300");
 
-        WebElement inputBut = driver.findElement(By.className("button button_default"));
+        WebElement inputBut = driver.findElement(By.cssSelector("button.button_default"));
         inputBut.click();
     }
 
     @Test
     public void testWindow () {
 
-       Assert.assertEquals(checkFormName.getFormPaymentAmount("300.00 BYN"));
-       Assert.assertEquals(checkFormName.getButtonPaymentAmount("Оплатить 300.00 BYN"));
-       Assert.assertEquals(checkFormName.getCheckNumber("Оплата: Услуги связи Номер:375297777777"));
+       Assert.assertEquals("300.00 BYN",checkFormName.getFormPaymentAmount());
+       Assert.assertEquals("Оплатить 300.00 BYN",checkFormName.getButtonPaymentAmount());
+       Assert.assertEquals("Оплата: Услуги связи Номер:375297777777",checkFormName.getCheckNumber());
     }
 
     @Test
     public void  testPleysholder () {
 
-        Assert.assertEquals(checkFormName.getNumberCard("Номер карты"));
-        Assert.assertEquals(checkFormName.getValidityPeriod("Срок действия"));
-        Assert.assertEquals(checkFormName.getUserName("Имя держателя (как на карте)"));
-        Assert.assertEquals(checkFormName.getUserCode("CVC"));
+        Assert.assertTrue(checkFormName.getNumberCard());
+        Assert.assertTrue(checkFormName.getValidityPeriod());
+        Assert.assertTrue(checkFormName.getUserName());
+        Assert.assertTrue(checkFormName.getUserCode());
     }
 
     @Test
 
     public void testIcon () {
 
-        Assert.assertTrue(Boolean.parseBoolean(checkFormName.getIconVisa("visa-system")));
-        Assert.assertTrue(Boolean.parseBoolean(checkFormName.getIconMastercard("mastercard-system")));
-        Assert.assertTrue(Boolean.parseBoolean(checkFormName.getIconBelkart("belcart-system")));
-        Assert.assertTrue(Boolean.parseBoolean(checkFormName.getIconMir("mir-system")));
+        Assert.assertTrue(checkFormName.getIconVisa());
+        Assert.assertTrue(checkFormName.getIconMastercard());
+        Assert.assertTrue(checkFormName.getIconBelkart());
+        Assert.assertTrue(checkFormName.getIconMir());
     }
 
 

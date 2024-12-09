@@ -6,6 +6,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+
 import java.util.concurrent.TimeUnit;
 
 public class CheckBlockNameTest {
@@ -15,6 +17,10 @@ public class CheckBlockNameTest {
     @Before
     public void setUp() {
         System.setProperty("webdriver.chrome.driver", "src/test/java/resource/chromedriver.exe");
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--incognito");
+        WebElement clickCookie = driver.findElement(By.id("cookie-agree"));
+        clickCookie.click();
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
@@ -25,16 +31,16 @@ public class CheckBlockNameTest {
 
     @Test
     public void testBlockName() {
-        Assert.assertEquals("Онлайн пополнение без комиссии", checkBlockName.getCheckBlockName());
+        Assert.assertEquals("Онлайн пополнение\n" + "без комиссии", checkBlockName.getCheckBlockName());
     }
 
     @Test
     public void testPaymentSystemsVisibility() {
-        Assert.assertTrue(Boolean.parseBoolean(checkBlockName.getCheckPaymentVisa("visa")));
-        Assert.assertTrue(Boolean.parseBoolean(checkBlockName.getCheckPaymentVisaV("visa-verified")));
-        Assert.assertTrue(Boolean.parseBoolean(checkBlockName.getCheckPaymentMasterCardS("mastercard-secure")));
-        Assert.assertTrue(Boolean.parseBoolean(checkBlockName.getCheckPaymentMasterCard("mastercard")));
-        Assert.assertTrue(Boolean.parseBoolean(checkBlockName.getCheckPaymentBelKart("belkart")));
+        Assert.assertTrue(checkBlockName.getCheckPaymentVisa());
+        Assert.assertTrue(checkBlockName.getCheckPaymentVisaV());
+        Assert.assertTrue(checkBlockName.getCheckPaymentMasterCardS());
+        Assert.assertTrue(checkBlockName.getCheckPaymentMasterCard());
+        Assert.assertTrue(checkBlockName.getCheckPaymentBelKart());
     }
 
     @Test
@@ -48,7 +54,7 @@ public class CheckBlockNameTest {
         inputField2.click();
         inputField2.sendKeys("200");
 
-        WebElement inputButton = driver.findElement(By.className("button button_default"));
+        WebElement inputButton = driver.findElement(By.cssSelector("button.button_default"));
         inputButton.click();
 
         String enteredValue = inputField2.getAttribute("value");

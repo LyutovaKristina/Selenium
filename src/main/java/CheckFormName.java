@@ -37,52 +37,53 @@ public class CheckFormName {
     private By iconMir = By.cssSelector("img[src*= 'mir-system']");
 
 
-    public String getButtonSelectConnectionText() {
-        return driver.findElement(buttonSelectConnection).getAttribute();
+    public Boolean getButtonSelectConnectionText() {
+        return isElementVisible(buttonSelectConnection);
     }
 
-    public String getFormNumber() {
-        return driver.findElement(formNumber).getAttribute();
+    public Boolean getFormNumber() {
+
+        return isElementVisible(formNumber);
     }
 
-    public String getFormSumm() {
-        return driver.findElement(formSumm).getAttribute();
+    public Boolean getFormSumm() {
+        return isElementVisible(formSumm);
     }
 
-    public String getButtonSelecHome() {
-        return driver.findElement(buttonSelectHome).getAttribute();
+    public Boolean getButtonSelecHome() {
+        return isElementVisible(buttonSelectHome);
     }
 
-    public String getFormSubscriber() {
-        return driver.findElement(formSubscriber).getAttribute();
+    public Boolean getFormSubscriber() {
+        return isElementVisible(formSubscriber);
     }
 
-    public String getFormSummInternet() {
-        return driver.findElement(formSummInternet).getAttribute();
+    public Boolean getFormSummInternet() {
+        return isElementVisible(formSummInternet);
     }
 
-    public String getButtonSelectInstallment() {
-        return driver.findElement(buttonSelectInstallment).getAttribute();
+    public Boolean getButtonSelectInstallment() {
+        return isElementVisible(buttonSelectInstallment);
     }
 
-    public String getFormNumberInstallment() {
-        return driver.findElement(formNumberInstallment).getAttribute();
+    public Boolean getFormNumberInstallment() {
+        return isElementVisible(formNumberInstallment);
     }
 
-    public String getFormSummInstallment() {
-        return driver.findElement(formSummInstallment).getAttribute();
+    public Boolean getFormSummInstallment() {
+        return isElementVisible(formSummInstallment);
     }
 
-    public String getButtonSelectDebt() {
-        return driver.findElement(buttonSelectDebt).getAttribute();
+    public Boolean getButtonSelectDebt() {
+        return isElementVisible(buttonSelectDebt);
     }
 
-    public String getFormArrears() {
-        return driver.findElement(formArrears).getAttribute();
+    public Boolean getFormArrears() {
+        return isElementVisible(formArrears);
     }
 
-    public String getFormSummArrears() {
-        return driver.findElement(formSummArrears).getAttribute();
+    public Boolean getFormSummArrears() {
+        return isElementVisible(formSummArrears);
     }
 
 // проверка окна оплаты ( сумма сверху и на кнопке и номер телефона )
@@ -97,25 +98,27 @@ public class CheckFormName {
     }
 
     // проверка плейсхолдеров
-    public String getNumberCard () {
-        return driver.findElement(numberCard).getAttribute();
+    public Boolean getNumberCard () {
+        return isElementVisible(numberCard);
     }
-    public String getValidityPeriod () {
-        return driver.findElement(validityPeriod).getAttribute();
+
+
+    public Boolean getValidityPeriod () {
+        return isElementVisible(validityPeriod);
     }
-    public String getUserName () {
-        return driver.findElement(userName).getAttribute();
+    public Boolean getUserName () {
+        return isElementVisible(userName);
     }
-    public String getUserCode () {
-        return driver.findElement(userCode).getAttribute();
+    public Boolean getUserCode () {
+        return isElementVisible(userCode);
     }
 
     // проверка иконок
     public Boolean getIconVisa () {
         return isElementVisible(iconVisa);
     }
-    private Boolean isElementVisible(By iconVisa) {
-    }
+
+
     public Boolean getIconMastercard () {
         return isElementVisible(iconMastercard);
     }
@@ -126,4 +129,12 @@ public class CheckFormName {
         return isElementVisible(iconMir);
     }
 
+    private boolean isElementVisible(By locator) {
+        try {
+            WebElement element = driver.findElement(locator);
+            return element.isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }
