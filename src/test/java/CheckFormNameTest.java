@@ -1,3 +1,4 @@
+import jdk.jfr.Description;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -7,7 +8,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-
 import java.util.concurrent.TimeUnit;
 
 public class CheckFormNameTest {
@@ -30,6 +30,7 @@ public class CheckFormNameTest {
     }
 
     @Test
+    @Description("Проверка заполнения форм")
     public void checkConnection () {
         Assert.assertTrue(checkFormName.getButtonSelectConnectionText());
         Assert.assertTrue(checkFormName.getFormNumber());
@@ -46,6 +47,7 @@ public class CheckFormNameTest {
     }
 
     @Test
+    @Description("Проверка ввода данных и отправки формы")
     public void testSubmissionCheck () {
 
         WebElement inputNumber = driver.findElement(By.id("connection-phone"));
@@ -61,6 +63,7 @@ public class CheckFormNameTest {
     }
 
     @Test
+    @Description("Проверка отображения введенных данных")
     public void testWindow () {
 
        Assert.assertEquals("300.00 BYN",checkFormName.getFormPaymentAmount());
@@ -69,6 +72,7 @@ public class CheckFormNameTest {
     }
 
     @Test
+    @Description("Проверка отображения плейсхолдеров")
     public void  testPleysholder () {
 
         Assert.assertTrue(checkFormName.getNumberCard());
@@ -78,7 +82,7 @@ public class CheckFormNameTest {
     }
 
     @Test
-
+    @Description("Проверка отображения иконок")
     public void testIcon () {
 
         Assert.assertTrue(checkFormName.getIconVisa());
