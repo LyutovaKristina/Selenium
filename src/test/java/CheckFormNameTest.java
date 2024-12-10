@@ -20,15 +20,24 @@ public class CheckFormNameTest {
         System.setProperty("web.driver.chrome.driver", "src/test/java/resource/chromedriver.exe");
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--incognito");
-        WebElement clickCookie = driver.findElement(By.id("cookie-agree"));
-        clickCookie.click();
+
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         driver.get("https://mts.by");
 
+        WebElement clickCookie = driver.findElement(By.id("cookie-agree"));
+        clickCookie.click();
+
         checkFormName = new CheckFormName(driver);
     }
+    @After
+    public void tearDown() {
+        if (driver != null) {
+            driver.quit();
+        }
+    }
+
 
     @Test
     @Description("Проверка плейсхолдеров для каждого варианта оплаты")
@@ -91,6 +100,5 @@ public class CheckFormNameTest {
         Assert.assertTrue(checkFormName.getIconBelkart());
         Assert.assertTrue(checkFormName.getIconMir());
     }
-
 
 }
