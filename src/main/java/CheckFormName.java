@@ -11,7 +11,7 @@ public class CheckFormName {
 
     private By buttonSelectConnection = By.xpath("//*[contains(text(), 'Услуги связи')]");
     private By formNumber = By.id("connection-phone");
-    private By formSumm = By.id("connection-summ");
+    private By formSumm = By.id("connection-sum");
     private By buttonSelectHome = By.xpath("//*[contains(text(), 'Домашний интернет')]");
     private By formSubscriber = By.id("internet-phone");
     private By formSummInternet = By.id("internet-sum");

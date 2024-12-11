@@ -1,4 +1,3 @@
-import jdk.jfr.Description;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -8,6 +7,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.NoSuchElementException;
+
 import java.util.concurrent.TimeUnit;
 
 public class CheckFormNameTest {
@@ -25,15 +26,17 @@ public class CheckFormNameTest {
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         driver.get("https://mts.by");
 
-        WebElement clickCookie = driver.findElement(By.id("cookie-agree"));
-        clickCookie.click();
+        try {
+            WebElement clickCookie = driver.findElement(By.id("cookie-agree"));
+            clickCookie.click();
+        } catch (NoSuchElementException ignored) {
+        }
 
         checkFormName = new CheckFormName(driver);
     }
 
-
     @Test
-    public void checkConnection () {
+    public void checkConnection() {
         Assert.assertTrue(checkFormName.getButtonSelectConnectionText());
         Assert.assertTrue(checkFormName.getFormNumber());
         Assert.assertTrue(checkFormName.getFormSumm());
@@ -49,8 +52,7 @@ public class CheckFormNameTest {
     }
 
     @Test
-    public void testSubmissionCheck () {
-
+    public void testSubmissionCheck() {
         WebElement inputNumber = driver.findElement(By.id("connection-phone"));
         inputNumber.click();
         inputNumber.sendKeys("297777777");
@@ -64,16 +66,14 @@ public class CheckFormNameTest {
     }
 
     @Test
-    public void testWindow () {
-
-       Assert.assertEquals("300.00 BYN",checkFormName.getFormPaymentAmount());
-       Assert.assertEquals("Оплатить 300.00 BYN",checkFormName.getButtonPaymentAmount());
-       Assert.assertEquals("Оплата: Услуги связи Номер:375297777777",checkFormName.getCheckNumber());
+    public void testWindow() {
+        Assert.assertEquals("300.00 BYN", checkFormName.getFormPaymentAmount());
+        Assert.assertEquals("Оплатить 300.00 BYN", checkFormName.getButtonPaymentAmount());
+        Assert.assertEquals("Оплата: Услуги связи Номер:375297777777", checkFormName.getCheckNumber());
     }
 
     @Test
-    public void  testPleysholder () {
-
+    public void testPlaceholder() {
         Assert.assertTrue(checkFormName.getNumberCard());
         Assert.assertTrue(checkFormName.getValidityPeriod());
         Assert.assertTrue(checkFormName.getUserName());
@@ -81,8 +81,7 @@ public class CheckFormNameTest {
     }
 
     @Test
-    public void testIcon () {
-
+    public void testIcon() {
         Assert.assertTrue(checkFormName.getIconVisa());
         Assert.assertTrue(checkFormName.getIconMastercard());
         Assert.assertTrue(checkFormName.getIconBelkart());
@@ -93,6 +92,7 @@ public class CheckFormNameTest {
     public void tearDown() {
         if (driver != null) {
             driver.quit();
+            System.out.println("Драйвер закрыт.");
         }
     }
 }
