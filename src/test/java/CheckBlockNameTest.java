@@ -34,7 +34,7 @@ public class CheckBlockNameTest {
 
     @Test
     public void testBlockName() {
-        Assert.assertEquals("Онлайн пополнение \n" + "без комиссии" , checkBlockName.getCheckBlockName());
+        Assert.assertEquals("Онлайн пополнение\n" + "без комиссии" , checkBlockName.getCheckBlockName());
     }
 
 
