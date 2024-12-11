@@ -33,7 +33,6 @@ public class CheckFormNameTest {
 
 
     @Test
-    @Description("Проверка заполнения форм")
     public void checkConnection () {
         Assert.assertTrue(checkFormName.getButtonSelectConnectionText());
         Assert.assertTrue(checkFormName.getFormNumber());
