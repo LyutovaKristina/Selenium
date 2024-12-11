@@ -60,7 +60,7 @@ public class CheckBlockNameTest {
     }
 
     @Test
-    public void testEntersumm () {
+    public void testEnterSumm () {
         String testSumm = "200";
         checkBlockName.enterSum(testSumm);
     }
