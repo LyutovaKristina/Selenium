@@ -66,6 +66,12 @@ public class CheckBlockName {
         WebElement phoneNumberInputElement = driver.findElement(phoneNumberInput);
         phoneNumberInputElement.clear();
         phoneNumberInputElement.sendKeys(phone);
+    }
+    public void enterSum(String summ) {
+
+        WebElement serviseTypeSelectElement = driver.findElement(serviceTypeSelect);
+        serviseTypeSelectElement.click();
+        serviseTypeSelectElement.sendKeys(summ);
 
         driver.findElement(continueButton).click();
     }

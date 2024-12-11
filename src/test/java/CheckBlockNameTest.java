@@ -34,7 +34,7 @@ public class CheckBlockNameTest {
 
     @Test
     public void testBlockName() {
-        Assert.assertEquals("Онлайн пополнение " , checkBlockName.getCheckBlockName());
+        Assert.assertEquals("Онлайн пополнение \n" + "без комиссии" , checkBlockName.getCheckBlockName());
     }
 
 
@@ -47,6 +47,7 @@ public class CheckBlockNameTest {
         Assert.assertTrue(checkBlockName.getCheckPaymentBelKart());
     }
 
+
     @Test
     public void testMoreInfoLink() {
         checkBlockName.clickMoreInfo();
@@ -56,6 +57,12 @@ public class CheckBlockNameTest {
     public void testEnterPhone() {
         String testPhoneNumber = "297777777";
         checkBlockName.enterPhone(testPhoneNumber);
+    }
+
+    @Test
+    public void testEntersumm () {
+        String testSumm = "200";
+        checkBlockName.enterSum(testSumm);
     }
 
     @After
