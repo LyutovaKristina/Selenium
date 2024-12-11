@@ -92,7 +92,7 @@ public class CheckFormNameTest {
     public void tearDown() {
         if (driver != null) {
             driver.quit();
-            System.out.println("Драйвер закрыт.");
+
         }
     }
 }
