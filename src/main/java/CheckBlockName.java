@@ -18,7 +18,7 @@ public class CheckBlockName {
     private By moreInfoLink = By.linkText("Подробнее о сервисе");
     private By serviceTypeSelect = By.id("serviceType");
     private By phoneNumberInput = By.id("connection-phone");
-    private By continueButton = By.linkText("Продолжить");
+    private By continueButton = By.cssSelector("button.button__default");
 
 
     public String getCheckBlockName() {

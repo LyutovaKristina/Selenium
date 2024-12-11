@@ -16,12 +16,12 @@ public class CheckFormNameTest {
 
     @Before
     public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "src/test/java/resources");
+        System.setProperty("webdriver.chrome.driver", "src/test/java/resources/chromedriver.exe");
 
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--incognito");
         driver = new ChromeDriver(options);
-        driver.manage().window().maximize(); // Перенесите сюда
+        driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         driver.get("https://mts.by");
 
@@ -61,7 +61,7 @@ public class CheckFormNameTest {
         inputSumm.click();
         inputSumm.sendKeys("300");
 
-        WebElement inputBut = driver.findElement(By.linkText("Продолжить"));
+        WebElement inputBut = driver.findElement(By.cssSelector("button.button__default"));
         inputBut.click();
     }
 

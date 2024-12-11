@@ -16,12 +16,12 @@ public class CheckBlockNameTest {
 
     @Before
     public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "src/test/java/resources");
+        System.setProperty("webdriver.chrome.driver", "src/test/java/resources/chromedriver.exe");
 
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--incognito");
         driver = new ChromeDriver(options);
-        driver.manage().window().maximize(); // Перенесите сюда
+        driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         driver.get("https://mts.by");
 
@@ -57,7 +57,7 @@ public class CheckBlockNameTest {
         inputField2.click();
         inputField2.sendKeys("200");
 
-        WebElement inputButton = driver.findElement(By.linkText("Продолжить"));
+        WebElement inputButton = driver.findElement(By.cssSelector("button.button__default"));
         inputButton.click();
 
         String enteredValue = inputField2.getAttribute("value");
