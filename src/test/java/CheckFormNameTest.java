@@ -26,11 +26,8 @@ public class CheckFormNameTest {
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         driver.get("https://mts.by");
 
-        try {
-            WebElement clickCookie = driver.findElement(By.id("cookie-agree"));
-            clickCookie.click();
-        } catch (NoSuchElementException ignored) {
-        }
+        WebElement clickCookie = driver.findElement(By.id("cookie-agree"));
+        clickCookie.click();
 
         checkFormName = new CheckFormName(driver);
     }
@@ -40,12 +37,18 @@ public class CheckFormNameTest {
         Assert.assertTrue(checkFormName.getButtonSelectConnectionText());
         Assert.assertTrue(checkFormName.getFormNumber());
         Assert.assertTrue(checkFormName.getFormSumm());
+        WebElement clickHeader = driver.findElement(By.className("select__arrow"));
+        clickHeader.click();
         Assert.assertTrue(checkFormName.getButtonSelectHome());
         Assert.assertTrue(checkFormName.getFormSubscriber());
         Assert.assertTrue(checkFormName.getFormSummInternet());
+        WebElement clickHeader2 = driver.findElement(By.className("select__arrow"));
+        clickHeader2.click();
         Assert.assertTrue(checkFormName.getButtonSelectInstallment());
         Assert.assertTrue(checkFormName.getFormNumberInstallment());
         Assert.assertTrue(checkFormName.getFormSummInstallment());
+        WebElement clickHeader3 = driver.findElement(By.className("select__arrow"));
+        clickHeader3.click();
         Assert.assertTrue(checkFormName.getButtonSelectDebt());
         Assert.assertTrue(checkFormName.getFormArrears());
         Assert.assertTrue(checkFormName.getFormSummArrears());

@@ -58,9 +58,9 @@ public class CheckBlockNameTest {
     }
 
     @Test
-    public void testEnterSumm () {
-        String testSumm = "200";
-        checkBlockName.enterSum(testSumm);
+    public void testEnterSum () {
+        String testSum = "200";
+        checkBlockName.enterSum(testSum);
     }
 
     @After
