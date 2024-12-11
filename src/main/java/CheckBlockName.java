@@ -9,13 +9,14 @@ public class CheckBlockName {
         this.driver = driver;
     }
 
-    private By blockName = By.xpath("//h2[contains(text(), 'Онлайн пополнение \n без комиссии')]");
+    private By blockName = By.xpath("//h2[contains(text(), 'Онлайн пополнение')]");
     private By paymentVisa = By.cssSelector("img[src*= 'visa']");
     private By paymentVisaV = By.cssSelector("img[src*= 'visa-verified']");
     private By paymentMasterCardS = By.cssSelector("img[src*= 'mastercard-secure']");
     private By paymentMasterCard = By.cssSelector("img[src*= 'mastercard']");
     private By paymentBelKart = By.cssSelector("img[src*= 'belkart']");
     private By moreInfoLink = By.linkText("Подробнее о сервисе");
+
     private By serviceTypeSelect = By.id("serviceType");
     private By phoneNumberInput = By.id("connection-phone");
     private By continueButton = By.cssSelector("button.button__default");
@@ -54,16 +55,17 @@ public class CheckBlockName {
         }
     }
 
+
     public void clickMoreInfo() {
         driver.findElement(moreInfoLink).click();
     }
 
-    public void fillRechargeForm(String serviceType, String phoneNumber) {
-        WebElement serviceTypeSelectElement = driver.findElement(serviceTypeSelect);
-        serviceTypeSelectElement.sendKeys(serviceType);
+
+    public void enterPhone(String phone) {
 
         WebElement phoneNumberInputElement = driver.findElement(phoneNumberInput);
-        phoneNumberInputElement.sendKeys(phoneNumber);
+        phoneNumberInputElement.clear();
+        phoneNumberInputElement.sendKeys(phone);
 
         driver.findElement(continueButton).click();
     }

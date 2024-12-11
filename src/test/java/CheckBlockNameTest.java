@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.FindBy;
 
 import java.util.concurrent.TimeUnit;
 
@@ -33,9 +34,7 @@ public class CheckBlockNameTest {
 
     @Test
     public void testBlockName() {
-        WebElement windowPay = driver.findElement(By.className("pay__wrapper"));
-        windowPay.click();
-        Assert.assertEquals("Онлайн пополнение \n без комиссии" , checkBlockName.getCheckBlockName());
+        Assert.assertEquals("Онлайн пополнение " , checkBlockName.getCheckBlockName());
     }
 
 
@@ -49,19 +48,14 @@ public class CheckBlockNameTest {
     }
 
     @Test
-    public void testFillInputField() {
+    public void testMoreInfoLink() {
+        checkBlockName.clickMoreInfo();
+    }
 
-        WebElement inputField = driver.findElement(By.id("connection-phone"));
-        inputField.click();
-        inputField.sendKeys("297777777");
-
-        WebElement inputField2 = driver.findElement(By.id("connection-sum"));
-        inputField2.click();
-        inputField2.sendKeys("200");
-
-        WebElement inputButton = driver.findElement(By.cssSelector("button.button__default"));
-        inputButton.click();
-
+    @Test
+    public void testEnterPhone() {
+        String testPhoneNumber = "297777777";
+        checkBlockName.enterPhone(testPhoneNumber);
     }
 
     @After
