@@ -9,7 +9,7 @@ public class CheckBlockName {
         this.driver = driver;
     }
 
-    private By blockName = By.id("connection-sum");
+    private By blockName = By.xpath("//*[contains(text(), 'Онлайн пополнение')]");
     private By paymentVisa = By.cssSelector("img[src*= 'visa']");
     private By paymentVisaV = By.cssSelector("img[src*= 'visa-verified']");
     private By paymentMasterCardS = By.cssSelector("img[src*= 'mastercard-secure']");
