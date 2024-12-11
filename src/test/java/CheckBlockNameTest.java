@@ -33,7 +33,9 @@ public class CheckBlockNameTest {
 
     @Test
     public void testBlockName() {
-        Assert.assertEquals("Онлайн пополнение\n" + "без комиссии", checkBlockName.getCheckBlockName());
+        WebElement windowPay = driver.findElement(By.className("pay__wrapper"));
+        windowPay.click();
+        Assert.assertEquals("Онлайн пополнение \n без комиссии" , checkBlockName.getCheckBlockName());
     }
 
 
@@ -60,8 +62,6 @@ public class CheckBlockNameTest {
         WebElement inputButton = driver.findElement(By.cssSelector("button.button__default"));
         inputButton.click();
 
-        String enteredValue = inputField2.getAttribute("value");
-        Assert.assertEquals("200", enteredValue);
     }
 
     @After

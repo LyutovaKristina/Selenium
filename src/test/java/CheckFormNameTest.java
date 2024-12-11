@@ -38,7 +38,7 @@ public class CheckFormNameTest {
         Assert.assertTrue(checkFormName.getButtonSelectConnectionText());
         Assert.assertTrue(checkFormName.getFormNumber());
         Assert.assertTrue(checkFormName.getFormSumm());
-        Assert.assertTrue(checkFormName.getButtonSelecHome());
+        Assert.assertTrue(checkFormName.getButtonSelectHome());
         Assert.assertTrue(checkFormName.getFormSubscriber());
         Assert.assertTrue(checkFormName.getFormSummInternet());
         Assert.assertTrue(checkFormName.getButtonSelectInstallment());

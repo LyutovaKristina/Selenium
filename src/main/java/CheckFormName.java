@@ -50,7 +50,7 @@ public class CheckFormName {
         return isElementVisible(formSumm);
     }
 
-    public Boolean getButtonSelecHome() {
+    public Boolean getButtonSelectHome() {
         return isElementVisible(buttonSelectHome);
     }
 
