@@ -26,9 +26,11 @@ public class CheckFormNameTest {
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         driver.get("https://mts.by");
 
-        WebElement clickCookie = driver.findElement(By.id("cookie-agree"));
-        clickCookie.click();
-
+        try {
+            WebElement clickCookie = driver.findElement(By.id("cookie-agree"));
+            clickCookie.click();
+        } catch (NoSuchElementException ignored) {
+        }
         checkFormName = new CheckFormName(driver);
     }
 
