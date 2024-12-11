@@ -37,7 +37,6 @@ public class CheckBlockNameTest {
         Assert.assertEquals("Онлайн пополнение\n" + "без комиссии" , checkBlockName.getCheckBlockName());
     }
 
-
     @Test
     public void testPaymentSystemsVisibility() {
         Assert.assertTrue(checkBlockName.getCheckPaymentVisa());
@@ -46,7 +45,6 @@ public class CheckBlockNameTest {
         Assert.assertTrue(checkBlockName.getCheckPaymentMasterCard());
         Assert.assertTrue(checkBlockName.getCheckPaymentBelKart());
     }
-
 
     @Test
     public void testMoreInfoLink() {
