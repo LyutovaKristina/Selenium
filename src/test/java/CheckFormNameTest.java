@@ -15,19 +15,22 @@ public class CheckFormNameTest {
     private CheckFormName checkFormName;
 
     @Before
-    public void setup() {
-        System.setProperty("web.driver.chrome.driver", "src/test/java/resource/chromedriver.exe");
+    public void setUp() {
+        System.setProperty("webdriver.chrome.driver", "src/test/java/resources");
+
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--incognito");
-        WebElement clickCookie = driver.findElement(By.id("cookie-agree"));
-        clickCookie.click();
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
+        driver = new ChromeDriver(options);
+        driver.manage().window().maximize(); // Перенесите сюда
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         driver.get("https://mts.by");
 
+        WebElement clickCookie = driver.findElement(By.id("cookie-agree"));
+        clickCookie.click();
+
         checkFormName = new CheckFormName(driver);
     }
+
 
     @Test
     @Description("Проверка заполнения форм")
@@ -58,7 +61,7 @@ public class CheckFormNameTest {
         inputSumm.click();
         inputSumm.sendKeys("300");
 
-        WebElement inputBut = driver.findElement(By.cssSelector("button.button_default"));
+        WebElement inputBut = driver.findElement(By.linkText("Продолжить"));
         inputBut.click();
     }
 
@@ -91,5 +94,10 @@ public class CheckFormNameTest {
         Assert.assertTrue(checkFormName.getIconMir());
     }
 
-
+    @After
+    public void tearDown() {
+        if (driver != null) {
+            driver.quit();
+        }
+    }
 }

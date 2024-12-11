@@ -16,15 +16,17 @@ public class CheckBlockNameTest {
 
     @Before
     public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "src/test/java/resource/chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "src/test/java/resources");
+
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--incognito");
-        WebElement clickCookie = driver.findElement(By.id("cookie-agree"));
-        clickCookie.click();
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
+        driver = new ChromeDriver(options);
+        driver.manage().window().maximize(); // Перенесите сюда
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         driver.get("https://mts.by");
+
+        WebElement clickCookie = driver.findElement(By.id("cookie-agree"));
+        clickCookie.click();
 
         checkBlockName = new CheckBlockName(driver);
     }
@@ -33,6 +35,7 @@ public class CheckBlockNameTest {
     public void testBlockName() {
         Assert.assertEquals("Онлайн пополнение\n" + "без комиссии", checkBlockName.getCheckBlockName());
     }
+
 
     @Test
     public void testPaymentSystemsVisibility() {
@@ -54,7 +57,7 @@ public class CheckBlockNameTest {
         inputField2.click();
         inputField2.sendKeys("200");
 
-        WebElement inputButton = driver.findElement(By.cssSelector("button.button_default"));
+        WebElement inputButton = driver.findElement(By.linkText("Продолжить"));
         inputButton.click();
 
         String enteredValue = inputField2.getAttribute("value");
@@ -66,3 +69,4 @@ public class CheckBlockNameTest {
         driver.quit();
     }
 }
+
