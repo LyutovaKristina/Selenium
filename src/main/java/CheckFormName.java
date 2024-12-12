@@ -11,7 +11,7 @@ public class CheckFormName {
 
     private By buttonSelectConnection = By.xpath("//*[contains(text(), 'Услуги связи')]");
     private By formNumber = By.id("connection-phone");
-    private By formSumm = By.id("connection-summ");
+    private By formSumm = By.id("connection-sum");
     private By buttonSelectHome = By.xpath("//*[contains(text(), 'Домашний интернет')]");
     private By formSubscriber = By.id("internet-phone");
     private By formSummInternet = By.id("internet-sum");
@@ -23,7 +23,7 @@ public class CheckFormName {
     private By formSummArrears = By.id("arrears-sum");
 
     private By formPaymentAmount = By.xpath("//*[contains(text(),'300.00 BYN')]");
-    private By buttonPaymentAmount = By.className("card-page_card");
+    private By buttonPaymentAmount = By.className("card-page__card");
     private By checkNumber = By.xpath("//*[contains(text(), 'Оплата: Услуги связи Номер:375297777777')]");
 
     private By numberCard = By.xpath("//*contains(text(), 'Номер карты')");
@@ -33,7 +33,7 @@ public class CheckFormName {
 
     private By iconVisa = By.cssSelector("img[src*= 'visa-system']");
     private By iconMastercard = By.cssSelector("img[src*= 'mastercard-system']");
-    private By iconBelkart = By.cssSelector("img[src*= 'belcart-system']");
+    private By iconBelkart = By.cssSelector("img[src*= 'belkart-system']");
     private By iconMir = By.cssSelector("img[src*= 'mir-system']");
 
 
@@ -50,7 +50,7 @@ public class CheckFormName {
         return isElementVisible(formSumm);
     }
 
-    public Boolean getButtonSelecHome() {
+    public Boolean getButtonSelectHome() {
         return isElementVisible(buttonSelectHome);
     }
 
@@ -101,8 +101,6 @@ public class CheckFormName {
     public Boolean getNumberCard () {
         return isElementVisible(numberCard);
     }
-
-
     public Boolean getValidityPeriod () {
         return isElementVisible(validityPeriod);
     }

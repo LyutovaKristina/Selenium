@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -16,41 +17,42 @@ public class CheckFormNameTest {
     private CheckFormName checkFormName;
 
     @Before
-    public void setup() {
-        System.setProperty("web.driver.chrome.driver", "src/test/java/resource/chromedriver.exe");
+    public void setUp() {
+        System.setProperty("webdriver.chrome.driver", "src/test/java/resources/chromedriver.exe");
+
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--incognito");
-
-        driver = new ChromeDriver();
+        driver = new ChromeDriver(options);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         driver.get("https://mts.by");
 
-        WebElement clickCookie = driver.findElement(By.id("cookie-agree"));
-        clickCookie.click();
-
+        try {
+            WebElement clickCookie = driver.findElement(By.id("cookie-agree"));
+            clickCookie.click();
+        } catch (NoSuchElementException ignored) {
+        }
         checkFormName = new CheckFormName(driver);
     }
-    @After
-    public void tearDown() {
-        if (driver != null) {
-            driver.quit();
-        }
-    }
-
 
     @Test
     @Description("Проверка плейсхолдеров для каждого варианта оплаты")
-    public void checkConnection () {
+    public void checkConnection() {
         Assert.assertTrue(checkFormName.getButtonSelectConnectionText());
         Assert.assertTrue(checkFormName.getFormNumber());
         Assert.assertTrue(checkFormName.getFormSumm());
-        Assert.assertTrue(checkFormName.getButtonSelecHome());
+        WebElement clickHeader = driver.findElement(By.className("select__arrow"));
+        clickHeader.click();
+        Assert.assertTrue(checkFormName.getButtonSelectHome());
         Assert.assertTrue(checkFormName.getFormSubscriber());
         Assert.assertTrue(checkFormName.getFormSummInternet());
+        WebElement clickHeader2 = driver.findElement(By.className("select__arrow"));
+        clickHeader2.click();
         Assert.assertTrue(checkFormName.getButtonSelectInstallment());
         Assert.assertTrue(checkFormName.getFormNumberInstallment());
         Assert.assertTrue(checkFormName.getFormSummInstallment());
+        WebElement clickHeader3 = driver.findElement(By.className("select__arrow"));
+        clickHeader3.click();
         Assert.assertTrue(checkFormName.getButtonSelectDebt());
         Assert.assertTrue(checkFormName.getFormArrears());
         Assert.assertTrue(checkFormName.getFormSummArrears());
@@ -58,7 +60,14 @@ public class CheckFormNameTest {
 
     @Test
     @Description("Проверка заполнения и отправки формы")
-    public void testSubmissionCheck () {
+    public void testSubmissionCheck() {
+
+        try {
+            WebElement clickCookie = driver.findElement(By.id("cookie-agree"));
+            clickCookie.click();
+        } catch (NoSuchElementException ignored) {
+        }
+
 
         WebElement inputNumber = driver.findElement(By.id("connection-phone"));
         inputNumber.click();
@@ -68,23 +77,21 @@ public class CheckFormNameTest {
         inputSumm.click();
         inputSumm.sendKeys("300");
 
-        WebElement inputBut = driver.findElement(By.cssSelector("button.button_default"));
+        WebElement inputBut = driver.findElement(By.cssSelector("button.button__default"));
         inputBut.click();
     }
 
     @Test
     @Description("Проверка отображения текста")
-    public void testWindow () {
-
-        Assert.assertEquals("300.00 BYN",checkFormName.getFormPaymentAmount());
-        Assert.assertEquals("Оплатить 300.00 BYN",checkFormName.getButtonPaymentAmount());
-        Assert.assertEquals("Оплата: Услуги связи Номер:375297777777",checkFormName.getCheckNumber());
+    public void testWindow() {
+        Assert.assertEquals("300.00 BYN", checkFormName.getFormPaymentAmount());
+        Assert.assertEquals("Оплатить 300.00 BYN", checkFormName.getButtonPaymentAmount());
+        Assert.assertEquals("Оплата: Услуги связи Номер:375297777777", checkFormName.getCheckNumber());
     }
 
     @Test
     @Description("Проверка отображения плейсхолдеров оплаты картой")
-    public void  testPleysholder () {
-
+    public void testPlaceholder() {
         Assert.assertTrue(checkFormName.getNumberCard());
         Assert.assertTrue(checkFormName.getValidityPeriod());
         Assert.assertTrue(checkFormName.getUserName());
@@ -93,12 +100,17 @@ public class CheckFormNameTest {
 
     @Test
     @Description("Проверка отображения иконок платежных систем")
-    public void testIcon () {
-
+    public void testIcon() {
         Assert.assertTrue(checkFormName.getIconVisa());
         Assert.assertTrue(checkFormName.getIconMastercard());
         Assert.assertTrue(checkFormName.getIconBelkart());
         Assert.assertTrue(checkFormName.getIconMir());
+    }
+    @After
+    public void tearDown() {
+        if (driver != null) {
+            driver.quit();
+        }
     }
 
 }
