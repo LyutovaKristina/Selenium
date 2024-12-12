@@ -8,7 +8,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.NoSuchElementException;
-
 import java.util.concurrent.TimeUnit;
 
 public class CheckFormNameTest {
@@ -58,6 +57,14 @@ public class CheckFormNameTest {
 
     @Test
     public void testSubmissionCheck() {
+
+        try {
+            WebElement clickCookie = driver.findElement(By.id("cookie-agree"));
+            clickCookie.click();
+        } catch (NoSuchElementException ignored) {
+        }
+
+
         WebElement inputNumber = driver.findElement(By.id("connection-phone"));
         inputNumber.click();
         inputNumber.sendKeys("297777777");
