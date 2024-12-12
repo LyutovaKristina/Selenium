@@ -86,7 +86,7 @@ public class CheckFormName {
         return isElementVisible(formSummArrears);
     }
 
-// проверка окна оплаты ( сумма сверху и на кнопке и номер телефона )
+    // проверка окна оплаты ( сумма сверху и на кнопке и номер телефона )
     public String getFormPaymentAmount () {
         return driver.findElement(formPaymentAmount).getText();
     }
