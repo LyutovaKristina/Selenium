@@ -38,16 +38,19 @@ public class CheckFormNameTest {
         Assert.assertTrue(checkFormName.getButtonSelectConnectionText());
         Assert.assertTrue(checkFormName.getFormNumber());
         Assert.assertTrue(checkFormName.getFormSumm());
+
         WebElement clickHeader = driver.findElement(By.className("select__arrow"));
         clickHeader.click();
         Assert.assertTrue(checkFormName.getButtonSelectHome());
         Assert.assertTrue(checkFormName.getFormSubscriber());
         Assert.assertTrue(checkFormName.getFormSummInternet());
+
         WebElement clickHeader2 = driver.findElement(By.className("select__arrow"));
         clickHeader2.click();
         Assert.assertTrue(checkFormName.getButtonSelectInstallment());
         Assert.assertTrue(checkFormName.getFormNumberInstallment());
         Assert.assertTrue(checkFormName.getFormSummInstallment());
+
         WebElement clickHeader3 = driver.findElement(By.className("select__arrow"));
         clickHeader3.click();
         Assert.assertTrue(checkFormName.getButtonSelectDebt());
@@ -57,14 +60,6 @@ public class CheckFormNameTest {
 
     @Test
     public void testSubmissionCheck() {
-
-        try {
-            WebElement clickCookie = driver.findElement(By.id("cookie-agree"));
-            clickCookie.click();
-        } catch (NoSuchElementException ignored) {
-        }
-
-
         WebElement inputNumber = driver.findElement(By.id("connection-phone"));
         inputNumber.click();
         inputNumber.sendKeys("297777777");
