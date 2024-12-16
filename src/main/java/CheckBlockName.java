@@ -1,58 +1,38 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class CheckBlockName {
-    private WebDriver driver;
+    private final WebDriver driver;
 
     public CheckBlockName(WebDriver driver) {
         this.driver = driver;
     }
 
-    private By blockName = By.xpath("//*[contains(text(), 'Онлайн пополнение')]");
-    private By paymentVisa = By.cssSelector("img[src*= 'visa']");
-    private By paymentVisaV = By.cssSelector("img[src*= 'visa-verified']");
-    private By paymentMasterCardS = By.cssSelector("img[src*= 'mastercard-secure']");
-    private By paymentMasterCard = By.cssSelector("img[src*= 'mastercard']");
-    private By paymentBelKart = By.cssSelector("img[src*= 'belkart']");
-    private By moreInfoLink = By.linkText("Подробнее о сервисе");
+    private final By blockName = By.cssSelector("#pay-section h2");
 
-    private By serviceTypeSelect = By.id("serviceType");
-    private By phoneNumberInput = By.id("connection-phone");
-    private By continueButton = By.cssSelector("button.button__default");
+    private final By paymentPartners = By.cssSelector(".pay__partners");
+    private final By moreInfoLink = By.linkText("Подробнее о сервисе");
+
+    private final By selectTypeButton = By.cssSelector("#pay-section .select__header");
+    private final By selectList = By.cssSelector("#pay-section .select__list");
+
+    public boolean checkPaymentPartnerIsVisible(String alt) {
+        String locator = "img[alt='" + alt + "']";
+        return driver.findElement(paymentPartners).findElement(By.cssSelector(locator)).isDisplayed();
+    }
 
 
     public String getCheckBlockName() {
         return driver.findElement(blockName).getText();
     }
 
-
-    public boolean getCheckPaymentVisa() {
-        return isElementVisible(paymentVisa);
-    }
-
-    public boolean getCheckPaymentVisaV() {
-        return isElementVisible(paymentVisaV);
-    }
-
-    public boolean getCheckPaymentMasterCardS() {
-        return isElementVisible(paymentMasterCardS);
-    }
-
-    public boolean getCheckPaymentMasterCard() {
-        return isElementVisible(paymentMasterCard);
-    }
-
-    public boolean getCheckPaymentBelKart() {
-        return isElementVisible(paymentBelKart);
-    }
-
     private boolean isElementVisible(By locator) {
-        try {
-            return driver.findElement(locator).isDisplayed();
-        } catch (Exception e) {
-            return false;
-        }
+        Wait<WebDriver> wait = new WebDriverWait(driver, 10);
+        wait.until(d -> ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
+        return true;
     }
 
 
@@ -60,19 +40,9 @@ public class CheckBlockName {
         driver.findElement(moreInfoLink).click();
     }
 
-
-    public void enterPhone(String phone) {
-
-        WebElement phoneNumberInputElement = driver.findElement(phoneNumberInput);
-        phoneNumberInputElement.clear();
-        phoneNumberInputElement.sendKeys(phone);
-    }
-    public void enterSum(String summ) {
-
-        WebElement serviseTypeSelectElement = driver.findElement(serviceTypeSelect);
-        serviseTypeSelectElement.click();
-        serviseTypeSelectElement.sendKeys(summ);
-
-        driver.findElement(continueButton).click();
+    public void selectServiceType(String optionsSelect) {
+        String xPath = "//p[@class='select__option'][text()='" + optionsSelect + "']";
+        driver.findElement(selectTypeButton).click();
+        driver.findElement(selectList).findElement(By.xpath(xPath)).click();
     }
 }

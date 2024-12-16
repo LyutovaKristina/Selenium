@@ -1,71 +1,35 @@
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.FindBy;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.concurrent.TimeUnit;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class CheckBlockNameTest {
-    private WebDriver driver;
+public class CheckBlockNameTest extends BaseTest {
     private CheckBlockName checkBlockName;
 
-    @Before
-    public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "src/test/java/resources/chromedriver.exe");
-
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--incognito");
-        driver = new ChromeDriver(options);
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        driver.get("https://mts.by");
-
-        WebElement clickCookie = driver.findElement(By.id("cookie-agree"));
-        clickCookie.click();
-
-        checkBlockName = new CheckBlockName(driver);
+    @BeforeEach
+    public void setPage() {
+        checkBlockName = new CheckBlockName(super.driver);
     }
 
     @Test
     public void testBlockName() {
-        Assert.assertEquals("Онлайн пополнение\n" + "без комиссии" , checkBlockName.getCheckBlockName());
+        assertEquals("Онлайн пополнение\n" + "без комиссии", checkBlockName.getCheckBlockName());
     }
 
-    @Test
-    public void testPaymentSystemsVisibility() {
-        Assert.assertTrue(checkBlockName.getCheckPaymentVisa());
-        Assert.assertTrue(checkBlockName.getCheckPaymentVisaV());
-        Assert.assertTrue(checkBlockName.getCheckPaymentMasterCardS());
-        Assert.assertTrue(checkBlockName.getCheckPaymentMasterCard());
-        Assert.assertTrue(checkBlockName.getCheckPaymentBelKart());
+    @ParameterizedTest
+    @ValueSource(strings = {"Visa", "Verified By Visa", "MasterCard", "MasterCard Secure Code", "Белкарт"})
+    public void testPaymentSystemsVisibility(String alt) {
+        assertTrue(checkBlockName.checkPaymentPartnerIsVisible(alt));
     }
 
     @Test
     public void testMoreInfoLink() {
         checkBlockName.clickMoreInfo();
-    }
-
-    @Test
-    public void testEnterPhone() {
-        String testPhoneNumber = "297777777";
-        checkBlockName.enterPhone(testPhoneNumber);
-    }
-
-    @Test
-    public void testEnterSum () {
-        String testSum = "200";
-        checkBlockName.enterSum(testSum);
-    }
-
-    @After
-    public void closeDriver() {
-        driver.quit();
+        String currentUrl = driver.getCurrentUrl();
+        assertEquals("https://www.mts.by/help/poryadok-oplaty-i-bezopasnost-internet-platezhey/", currentUrl);
     }
 }
 
